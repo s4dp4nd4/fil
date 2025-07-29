@@ -8,6 +8,7 @@ package main
 import (
 	"archive/zip"
 	"fmt"
+	"encoding/binary"
 	"os"
 	"path/filepath"
 	"strings"
@@ -101,6 +102,9 @@ func regularFile(filename string) {
 	}
 
 	switch {
+	case lenb >= 12 && HasPrefix(contentByte, "\xc6\x1f\xbc\x03\xc1\x03\x19\x1f"):
+		version := int(binary.LittleEndian.Uint32(contentByte[8:12]))
+		fmt.Printf("Hermes JavaScript bytecode, version %d", version)
 	case lenb >= 45 && HasPrefix(contentByte, "\x7FELF"):
 		fmt.Print("Elf file ")
 		doElf(contentByte)
