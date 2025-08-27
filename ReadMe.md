@@ -15,6 +15,12 @@ Download from https://github.com/file-go/fil/releases
 go install github.com/file-go/fil@latest
 ```
 
+### Build from source for Windows x64
+
+```sh
+GOOS=windows GOARCH=amd64 go build -o fil.exe
+```
+
 ### Usage
 
 Just like unix [file](https://en.wikipedia.org/wiki/File_(command)) command

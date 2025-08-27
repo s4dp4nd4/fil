@@ -144,6 +144,8 @@ func regularFile(filename string) {
 		fmt.Print("LLVM IR bitcode")
 	case HasPrefix(contentByte, "-----BEGIN CERTIFICATE-----"):
 		fmt.Print("PEM certificate")
+	case lenb > 20 && contentByte[0] == 0x30 && contentByte[1] > 0x80:
+		fmt.Print("DER encoded certificate or ASN.1 data")
 	case magic != -1 && HasPrefix(contentByte, "MZ") && magic < lenb-4 &&
 		Equal(contentByte[magic:magic+4], "\x50\x45\x00\x00"):
 
